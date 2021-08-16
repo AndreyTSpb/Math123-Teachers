@@ -26,9 +26,8 @@
                         <div class="our-teacher-item-info">
                             Преподаватель: <?=$teacher['subject'];?>.<br>
                             Стаж работы-5 лет
-                            <a href="/nashi-prepodavateli">подробней.</a>
                         </div>
-                        <a href = "" class="our-teacher__button btn-sub">
+                        <a href = "/nashi-prepodavateli" class="our-teacher__button btn-sub">
                             Подробней
                         </a>
                     </div>

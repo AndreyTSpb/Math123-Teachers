@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Math123 Teachers
  * Description: WordPress плагин для отображения слайдера с преподпвателями. Для вставки плагина на странице использовать шорт-код [Math123_Teachers title='название блока' slidesToShow='3' slidesToScroll='1' autoplay='1' autoplaySpeed='1000']tyt[/Math123_Teachers]. Плагин получает данные преподавателей из постов в категории "Преподаватели".
- * Plugin URI: https://
+ * Plugin URI: https://github.com/AndreyTSpb/Math123-Teachers
  * Author: Andrey Tynyany
  * Version: 1.0.1
  * Author URI: http://tynyany.ru
@@ -123,6 +123,11 @@ function math123_teacher_get_posts(){
         'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
     ) );
     /**
+     * Получаем ссылку на категорию
+     */
+    $cat_link = get_category_link(5);
+
+    /**
      * OBJECT
      * [post_author] => 1
      * [post_date] => 2021-04-13 14:18:27
@@ -139,6 +144,10 @@ function math123_teacher_get_posts(){
     $teachers_arr = array();
     foreach ($posts as $id_arr => $post){
 
+        /**
+         * Вместо линка на конкретную страницу препода $post->guid, 
+         * выводим линк на страницу категорий $cat_link
+         */
         $teach = math123_teacher_get_custom_fields($post->ID);
         $teachers_arr[$post->ID] = array(
             "photo"  => $teach['img'],
@@ -146,7 +155,7 @@ function math123_teacher_get_posts(){
             "subject"=> $teach['subject'],
             "name"   => $post->post_title,
             "desc"   => $post->post_excerpt,
-            "link"   => $post->guid
+            "link"   => $cat_link
         );
     }
     wp_reset_postdata(); // сброс
